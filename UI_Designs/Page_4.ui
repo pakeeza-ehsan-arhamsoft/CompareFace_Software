@@ -50,13 +50,19 @@ background-size: contain;
      <number>60</number>
     </property>
     <property name="topMargin">
-     <number>50</number>
+     <number>0</number>
     </property>
     <property name="rightMargin">
      <number>100</number>
     </property>
     <item>
      <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="maximumSize">
        <size>
         <width>135</width>
@@ -71,6 +77,9 @@ background-size: contain;
       </property>
       <property name="scaledContents">
        <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
       </property>
      </widget>
     </item>

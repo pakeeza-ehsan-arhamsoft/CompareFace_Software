@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>Group70.png</file>
     <file>Group 69.png</file>
     <file>Architecture.png</file>
     <file>AIFace.gif</file>

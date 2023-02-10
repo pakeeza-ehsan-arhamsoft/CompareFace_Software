@@ -106,6 +106,9 @@
           <property name="verticalSpacing">
            <number>10</number>
           </property>
+          <property name="leftMargin">
+           <number>50</number>
+          </property>
           <property name="rightMargin">
            <number>0</number>
           </property>
@@ -134,7 +137,7 @@ background: none;</string>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="probe_idLineEdit_3">
+           <widget class="QLineEdit" name="input_case_no">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -150,6 +153,9 @@ background: none;</string>
             <property name="styleSheet">
              <string notr="true">background-color: #3E536A;
 color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="maxLength">
+             <number>14</number>
             </property>
            </widget>
           </item>
@@ -178,7 +184,7 @@ background: none;</string>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="probe_idLineEdit_4">
+           <widget class="QLineEdit" name="input_ps">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -194,6 +200,9 @@ background: none;</string>
             <property name="styleSheet">
              <string notr="true">background-color: #3E536A;
 color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="maxLength">
+             <number>31</number>
             </property>
            </widget>
           </item>
@@ -222,7 +231,7 @@ background: none;</string>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="probe_idLineEdit_6">
+           <widget class="QLineEdit" name="input_exm_name">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -238,6 +247,9 @@ background: none;</string>
             <property name="styleSheet">
              <string notr="true">background-color: #3E536A;
 color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="maxLength">
+             <number>63</number>
             </property>
            </widget>
           </item>
@@ -266,7 +278,7 @@ background: none;</string>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="probe_idLineEdit_5">
+           <widget class="QLineEdit" name="input_exm_bp">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -282,6 +294,9 @@ background: none;</string>
             <property name="styleSheet">
              <string notr="true">background-color: #3E536A;
 color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="maxLength">
+             <number>20</number>
             </property>
            </widget>
           </item>
@@ -310,7 +325,7 @@ background: none;</string>
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="probe_idLineEdit_7">
+           <widget class="QLineEdit" name="input_remarks">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -326,6 +341,9 @@ background: none;</string>
             <property name="styleSheet">
              <string notr="true">background-color: #3E536A;
 color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="maxLength">
+             <number>139</number>
             </property>
            </widget>
           </item>
@@ -347,7 +365,7 @@ color: rgb(255, 255, 255);</string>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0">
           <item>
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="frame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -373,7 +391,8 @@ color: rgb(255, 255, 255);</string>
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">background: none;</string>
+             <string notr="true">background: none;
+</string>
             </property>
             <property name="text">
              <string/>

@@ -271,7 +271,7 @@ background:none;
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLabel" name="label_51">
+               <widget class="QLabel" name="probe_id">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -329,7 +329,7 @@ background:none;</string>
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLabel" name="label_54">
+               <widget class="QLabel" name="time_generation">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -370,7 +370,7 @@ background:none;</string>
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLabel" name="label_55">
+               <widget class="QLabel" name="case_number">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -405,7 +405,7 @@ background:none;</string>
                </widget>
               </item>
               <item row="6" column="1">
-               <widget class="QLabel" name="label_56">
+               <widget class="QLabel" name="Examiner_number">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -440,7 +440,7 @@ background:none;</string>
                </widget>
               </item>
               <item row="7" column="1">
-               <widget class="QLabel" name="label_57">
+               <widget class="QLabel" name="Examiner_name">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -475,7 +475,7 @@ background:none;</string>
                </widget>
               </item>
               <item row="8" column="1">
-               <widget class="QLabel" name="label_53">
+               <widget class="QLabel" name="remarks">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -493,7 +493,7 @@ color: white;</string>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLabel" name="label_52">
+               <widget class="QLabel" name="probe_result">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -528,6 +528,12 @@ color: white;</string>
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>350</width>
+                  <height>350</height>
+                 </size>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">background-image: url(:/newPrefix/icon-avatar.png);
 background-color: #34557a;
@@ -540,6 +546,9 @@ border-radius: 10px;
                 </property>
                 <property name="text">
                  <string/>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -2006,7 +2015,7 @@ border: 1px solid rgb(53, 132, 228);</string>
                <string notr="true">background-color: rgb(127, 0, 226);
 border-radius: 10px;
 color: white;
-background-image: url(:/newPrefix/geneate_report.png);
+background-image: url(:/newPrefix/generate_report.png);
 background-size: cover;
 background-position: center;</string>
               </property>
