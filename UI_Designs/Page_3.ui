@@ -716,6 +716,9 @@ color: rgba(255, 255, 255,0.6);
         <bold>true</bold>
        </font>
       </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
@@ -762,6 +765,9 @@ color: rgba(255, 255, 255,0.6);
         <weight>75</weight>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="toolTipDuration">
        <number>-1</number>
