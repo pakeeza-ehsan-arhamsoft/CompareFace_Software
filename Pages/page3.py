@@ -1,10 +1,10 @@
 import os
 import math
 import images
-from os import listdir
-from os.path import isfile, join
+from os.path import join
+import shutil
 from PIL import Image
-from PyQt5 import uic, QtCore
+from PyQt5 import uic
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 from PyQt5.QtCore import QRegExp
@@ -16,7 +16,10 @@ class Start_Page3(QtWidgets.QMainWindow):
         super().__init__()
         path = "/home/nouman/Desktop/Nouman Akram/qt5_design/CompareFace_Software/UI_Designs"
         self.window = uic.loadUi(f"{path}/Page_3.ui", self)
-        x = QRegExpValidator(QRegExp(r"[ \x{0020} -  \x{007E}]"))
+
+        self.pg3_btn1 = self.findChild(QtWidgets.QPushButton, "start_prob_button")
+        self.pg3_btn2 = self.findChild(QtWidgets.QPushButton, "home_button")
+        self.pg3_btn3 = self.findChild(QtWidgets.QPushButton, "back_button")
 
         self.frame = self.findChild(QtWidgets.QLabel, "image_label")
 
@@ -93,6 +96,8 @@ class Start_Page3(QtWidgets.QMainWindow):
 
         self.folder_upload_button.clicked.connect(self.folder_upload)
 
+        ###################### Old Case Photos ###################################
+
         ###################### Start Prob ###################################
 
         self.start_prob_button = self.findChild(
@@ -102,23 +107,26 @@ class Start_Page3(QtWidgets.QMainWindow):
         self.start_prob_button.clicked.connect(self.save_images)
 
     def show_single_image_label(self):
+        self.remove_temp_folder()
         self.upload_button.show()
-        fname = os.path.abspath("../images/Group70.png")
+        fname = os.path.abspath("images/Group70.png")
         im = Image.open(fname)
         fname = self.resize_image(fname, im)
         self.frame.setPixmap(QPixmap(fname))
         self.stack_widget.setCurrentIndex(0)
 
     def show_multiple_image_label(self):
+        self.remove_temp_folder()
         self.upload_images_list.clear()
         self.multiple_photos_label.clear()
+        self.upload_image_label.show()
         self.images_scroll_area.hide()
         self.target_photos_widget.show()
-        self.upload_image_label.show()
         self.frame.clear()
         self.stack_widget.setCurrentIndex(1)
 
     def show_folder_label(self):
+        self.remove_temp_folder()
         self.upload_images_list.clear()
         self.folder_images_label.clear()
         self.target_folder_widget.show()
@@ -127,6 +135,13 @@ class Start_Page3(QtWidgets.QMainWindow):
         self.stack_widget.setCurrentIndex(2)
 
     def show_old_case_photo_label(self):
+        self.remove_temp_folder()
+        self.upload_images_list.clear()
+        media_file_path = os.path.abspath("FaceAI Media")
+        images = self.get_images(media_file_path)
+        for image in images:
+            self.upload_images_list.append(image)
+
         self.stack_widget.setCurrentIndex(3)
 
     def show_popup(self, txt):
@@ -281,20 +296,36 @@ class Start_Page3(QtWidgets.QMainWindow):
 
         return fname
 
+    def remove_temp_folder(self, folder_name="Images Temp Folder"):
+        if os.path.isdir(folder_name):
+            shutil.rmtree(folder_name)
+        else:
+            print("Folder does not exist.")
+
     def save_images(self):
         if self.upload_images_list:
             for image in self.upload_images_list:
                 image_name = image.split("/")[-1]
-                temp_folder = "FaceAI Media"
+
+                media_folder = "FaceAI Media"
+                temp_folder = "Images Temp Folder"
+
+                if not os.path.exists(media_folder):
+                    os.makedirs(media_folder)
+
                 if not os.path.exists(temp_folder):
                     os.makedirs(temp_folder)
 
                 # Create a file in the temporary folder to store the data
                 self.path_folder = os.path.abspath("FaceAI Media")
+                self.temp_folder = os.path.abspath("Images Temp Folder")
+
 
                 img = Image.open(image)
                 img = img.convert("RGB")
                 img.save(self.path_folder + f"/{image_name}")
+                img.save(self.temp_folder + f"/{image_name}")
+
         else:
             self.show_popup("No valid supported image file is selected.")
 

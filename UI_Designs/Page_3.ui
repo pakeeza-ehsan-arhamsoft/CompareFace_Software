@@ -108,7 +108,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QCommandLinkButton" name="commandLinkButton">
+     <widget class="QCommandLinkButton" name="back_button">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -324,17 +324,33 @@ background: none;</string>
              <height>50</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <kerning>true</kerning>
+            </font>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="statusTip">
+            <string/>
            </property>
            <property name="autoFillBackground">
             <bool>false</bool>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: transparent;</string>
+            <string notr="true">background-color: transparent;
+padding:None;
+margin:None;</string>
            </property>
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../images/images.qrc">
@@ -345,6 +361,24 @@ background: none;</string>
              <width>70</width>
              <height>70</height>
             </size>
+           </property>
+           <property name="shortcut">
+            <string/>
+           </property>
+           <property name="autoRepeat">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </widget>
@@ -982,6 +1016,9 @@ background: none;</string>
           </property>
           <item>
            <widget class="QRadioButton" name="single_photo_radioButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
             <property name="styleSheet">
              <string notr="true">QRadioButton:unchecked {
 color: rgba(255, 255, 255,0.6);
@@ -1007,6 +1044,9 @@ color: rgba(255, 255, 255,0.6);
           </item>
           <item>
            <widget class="QRadioButton" name="multiple_photo_radioButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
             <property name="styleSheet">
              <string notr="true">QRadioButton:unchecked {
 color: rgba(255, 255, 255,0.6);
@@ -1026,6 +1066,9 @@ color: rgba(255, 255, 255,0.6);
           </item>
           <item>
            <widget class="QRadioButton" name="entire_folder_radioButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
             <property name="styleSheet">
              <string notr="true">QRadioButton:unchecked {
 color: rgba(255, 255, 255,0.6);
@@ -1045,6 +1088,9 @@ color: rgba(255, 255, 255,0.6);
           </item>
           <item>
            <widget class="QRadioButton" name="old_case_photo_radioButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
             <property name="styleSheet">
              <string notr="true">QRadioButton:unchecked {
 color: rgba(255, 255, 255,0.6);
@@ -1120,7 +1166,7 @@ color: rgba(255, 255, 255,0.6);
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter|Qt::AlignTop">
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="home_button">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
         <horstretch>0</horstretch>
@@ -1178,11 +1224,11 @@ background-color: rgb(53, 132, 228);</string>
    </layout>
    <zorder>stackedWidget</zorder>
    <zorder>label</zorder>
-   <zorder>commandLinkButton</zorder>
+   <zorder>back_button</zorder>
    <zorder>widget_2</zorder>
    <zorder>verticalSpacer</zorder>
    <zorder>start_prob_button</zorder>
-   <zorder>pushButton_2</zorder>
+   <zorder>home_button</zorder>
   </widget>
  </widget>
  <resources>

@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from Page2_load import Start_Page2
-from page3_load import Start_Page3
+from page3 import Start_Page3
 from Page7_load import Start_Page7
 from Page4_load import Start_Page4
 from Page5_load import Start_Page5
@@ -28,7 +28,7 @@ class Start_Page(QtWidgets.QMainWindow):
         self.ui_5 = Start_Page5()
         self.ui_6 = Start_Page6()
         self.ui_7 = Start_Page7()
-        
+
         # Click to go page2 from page 1 button
         self.btn1.clicked.connect(self.show_Page2)
         # Click to go to page 7 from page 1 button
@@ -86,39 +86,39 @@ class Start_Page(QtWidgets.QMainWindow):
         self.ui_6.hide()
         self.MainWindow = QtWidgets.QMainWindow()
         # Click to go page 6 from page 5
-        self.ui_5.pg5_btn1.clicked.connect(self.show_Page6)  
+        self.ui_5.pg5_btn1.clicked.connect(self.show_Page6)
         # Click to go page 1 from page 5
         self.ui_5.pg5_btn2.clicked.connect(self.show_Page1)
         # Click to go page 3 from page 5
-        self.ui_5.pg5_btn3.clicked.connect(self.show_Page3) 
+        self.ui_5.pg5_btn3.clicked.connect(self.show_Page3)
         self.ui_5.showMaximized()
 
     def show_Page6(self):
         self.ui_5.hide()
-        self.MainWindow = QtWidgets.QMainWindow() 
+        self.MainWindow = QtWidgets.QMainWindow()
         # Click to go page 5 from page 6
-        self.ui_6.pg6_btn3.clicked.connect(self.show_Page5)  
+        self.ui_6.pg6_btn3.clicked.connect(self.show_Page5)
         # Click to go page 1 from page 6
         self.ui_6.pg6_btn2.clicked.connect(self.show_Page1)
         self.ui_6.showMaximized()
-        
+
 
 
     def show_Page7(self):
         self.hide()
         self.ui_4.hide()
-        self.MainWindow = QtWidgets.QMainWindow()    
+        self.MainWindow = QtWidgets.QMainWindow()
         # Click to go page 1 from page 7
         self.ui_7.pg7_btnhome.clicked.connect(self.show_Page1)
         self.ui_7.showMaximized()
 
-    def delete_temp_folder():
-        shutil.rmtree('temp')
+    # def delete_temp_folder():
+    #     shutil.rmtree('temp')
 
-    atexit.register(delete_temp_folder)
+    # atexit.register(delete_temp_folder)
 
 
-    
+
 
 
 
