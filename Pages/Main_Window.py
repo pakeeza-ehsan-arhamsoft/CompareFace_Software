@@ -1,6 +1,7 @@
 from PyQt5 import uic
 from PyQt5 import QtWidgets
 import sys
+import os
 import images
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -29,6 +30,9 @@ class Start_Page(QtWidgets.QMainWindow):
         self.ui_6 = Start_Page6()
         self.ui_7 = Start_Page7()
 
+        # Connect create case button to clear text function
+        self.btn1.clicked.connect(self.clear_text)
+
         # Click to go page2 from page 1 button
         self.btn1.clicked.connect(self.show_Page2)
         # Click to go to page 7 from page 1 button
@@ -47,7 +51,6 @@ class Start_Page(QtWidgets.QMainWindow):
 
     def show_Page2(self):
         self.hide()
-
         self.MainWindow = QtWidgets.QMainWindow()
         self.ui_3.hide()
         # self.ui_2 = Start_Page2()
@@ -76,14 +79,17 @@ class Start_Page(QtWidgets.QMainWindow):
             self.ui_3.showMaximized()
 
     def show_Page4(self):
-        self.ui_3.hide()
-        self.MainWindow = QtWidgets.QMainWindow()
-        self.ui_4.showMaximized()
-        QTimer.singleShot(5000, self.show_Page5)
+        flag_pg3 = self.ui_3.send_data()
+        if flag_pg3:
+            self.ui_3.hide()
+            self.MainWindow = QtWidgets.QMainWindow()
+            self.ui_4.showMaximized()
+            QTimer.singleShot(5000, self.show_Page5)
 
     def show_Page5(self):
         self.ui_4.hide()
         self.ui_6.hide()
+        self.ui_5.get_images_list()
         self.MainWindow = QtWidgets.QMainWindow()
         # Click to go page 6 from page 5
         self.ui_5.pg5_btn1.clicked.connect(self.show_Page6)
@@ -95,6 +101,7 @@ class Start_Page(QtWidgets.QMainWindow):
 
     def show_Page6(self):
         self.ui_5.hide()
+        self.ui_7.hide()
         self.MainWindow = QtWidgets.QMainWindow()
         # Click to go page 5 from page 6
         self.ui_6.pg6_btn3.clicked.connect(self.show_Page5)
@@ -110,13 +117,26 @@ class Start_Page(QtWidgets.QMainWindow):
         self.MainWindow = QtWidgets.QMainWindow()
         # Click to go page 1 from page 7
         self.ui_7.pg7_btnhome.clicked.connect(self.show_Page1)
+        # Click to go page 6 from page 7
+        self.ui_7.pg7_back.clicked.connect(self.show_Page6)
         self.ui_7.showMaximized()
 
-    # def delete_temp_folder():
-    #     shutil.rmtree('temp')
+    def delete_temp_folder():
+        if os.path.exists('temp'):
+            shutil.rmtree('temp')
+        if os.path.exists('Images Temp Folder'):
+            shutil.rmtree('Images Temp Folder')
 
-    # atexit.register(delete_temp_folder)
+    atexit.register(delete_temp_folder)
 
+    def clear_text(self):
+        # Clear text for each page
+        self.ui_2.clear_text()
+        self.ui_3.clear_text()
+        # self.ui_4.clear_text()
+        # self.ui_5.clear_text()
+        # self.ui_6.clear_text()
+        # self.ui_7.clear_text()
 
 
 

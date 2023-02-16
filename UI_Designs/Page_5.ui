@@ -627,7 +627,7 @@ border-radius: 10px;
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit">
+             <widget class="QLineEdit" name="filter_text">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -641,10 +641,20 @@ border-radius: 10px;
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 10px;</string>
+               <string notr="true">border-radius: 10px;
+color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhNone</set>
+              </property>
+              <property name="maxLength">
+               <number>100</number>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="cursorMoveStyle">
+               <enum>Qt::LogicalMoveStyle</enum>
               </property>
              </widget>
             </item>
@@ -664,7 +674,7 @@ border-radius: 10px;
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="filter_button">
               <property name="minimumSize">
                <size>
                 <width>50</width>

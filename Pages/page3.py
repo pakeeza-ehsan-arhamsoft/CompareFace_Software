@@ -14,8 +14,7 @@ from PyQt5.QtGui import QRegExpValidator, QPixmap, QImage
 class Start_Page3(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        path = "/home/nouman/Desktop/Nouman Akram/qt5_design/CompareFace_Software/UI_Designs"
-        self.window = uic.loadUi(f"{path}/Page_3.ui", self)
+        self.window = uic.loadUi("UI_Designs/Page_3.ui", self)
 
         self.pg3_btn1 = self.findChild(QtWidgets.QPushButton, "start_prob_button")
         self.pg3_btn2 = self.findChild(QtWidgets.QPushButton, "home_button")
@@ -153,23 +152,11 @@ class Start_Page3(QtWidgets.QMainWindow):
 
     def send_data(self):
         flag = True
-        if self.input_case_no.text() == "":
+        if not self.upload_images_list:
             flag = False
-            self.show_popup("Please enter case number!")
-        if self.input_ps.text() == "":
-            flag = False
-            self.show_popup("Please enter PS!")
-        if self.input_exm_name.text() == "":
-            flag = False
-            self.show_popup("Please enter Examiner's name!")
-        if self.input_exm_bp.text() == "":
-            flag = False
-            self.show_popup("Please enter Examiner's BP number!")
-        if self.input_remarks.text() == "":
-            flag = False
-            self.show_popup("Please enter Remarks!")
-        if flag:
-            pass
+            self.show_popup("No Image Uploaded!")
+
+        return flag
 
     def resize_image(self, img, im):
         savefile = img
@@ -329,12 +316,40 @@ class Start_Page3(QtWidgets.QMainWindow):
         else:
             self.show_popup("No valid supported image file is selected.")
 
+    def clear_text(self):
+        # clear single image label
+        self.frame.clear()
+        fname = os.path.abspath("images/Group70.png")
+        im = Image.open(fname)
+        fname = self.resize_image(fname, im)
+        self.frame.setPixmap(QPixmap(fname))
 
-if __name__ == "__main__":
-    import sys
+        # clear multiple images label
+        self.upload_images_list.clear()
+        self.multiple_photos_label.clear()
+        self.upload_image_label.show()
+        self.images_scroll_area.hide()
+        self.target_photos_widget.show()
 
-    app = QtWidgets.QApplication(sys.argv)
-    ui = Start_Page3()
-    ui.showMaximized()
-    ui.show()
-    sys.exit(app.exec_())
+        # clear image folder label
+        self.upload_images_list.clear()
+        self.folder_images_label.clear()
+        self.target_folder_widget.show()
+        self.upload_folder_logo_label.show()
+        self.folder_images_scroll_area.hide()
+        self.stack_widget.setCurrentIndex(0)
+        self.single_photo_radio.setChecked(True)
+
+
+
+
+
+
+# if __name__ == "__main__":
+#     import sys
+
+#     app = QtWidgets.QApplication(sys.argv)
+#     ui = Start_Page3()
+#     ui.showMaximized()
+#     ui.show()
+#     sys.exit(app.exec_())

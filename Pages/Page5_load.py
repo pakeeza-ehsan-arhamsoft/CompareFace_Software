@@ -27,15 +27,57 @@ class Start_Page5(QMainWindow):
         self.probe_id = self.findChild(QLabel, "probe_id")
         self.sub_photo = self.findChild(QLabel, "label_8")
 
+        self.filter_text = self.findChild(QLineEdit, "filter_text")
+        self.filter_text.setMaxLength(2)
+        validator = QRegExpValidator(QRegExp("^[1-9][0-9]?$|^100$"))
+        self.filter_text.setValidator(validator)
+
+        self.filter_button = self.findChild(QPushButton, "filter_button")
+
+        self.filter_button.clicked.connect(self.filter_images)
+
+
+    def show_popup(self, txt):
+        msg = QMessageBox()
+        msg.setWindowTitle("Error Message!")
+        msg.setText(txt)
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+
+
+    def filter_images(self):
+        # convert user input into integer
+        if not self.filter_text.text():
+            return
+
+        filter_number = int(self.filter_text.text())
+
+        # get total layouts
+        total_layout = self.images_grid_layout.layout().count()
+
+        # show the error if filter number is larger than total layouts
+        if filter_number > total_layout:
+            self.show_popup("Value must be less than the number of matched photos")
+            return
+
+        i = filter_number
+        while i < total_layout:
+            if self.images_grid_layout.layout().itemAt(i):
+                widget = self.images_grid_layout.layout().itemAt(i).widget()
+                self.images_grid_layout.layout().removeWidget(widget)
+                image_path = widget.objectName().split(":")[-1]
+                os.remove(image_path)
+                i -= 1
+            i+=1
+        print(filter_number, total_layout)
+
+
+    def layout_show(self):
         # get the layout of self.images_grid_layout
         grid_layout = self.images_grid_layout.layout()
 
-        images_list = os.listdir("Images Temp Folder")
-
-        # get the number of layouts you want to add
-
         # loop through the layouts
-        for i in range(len(images_list)):
+        for i in range(len(self.images_list)):
             # create a container widget
             container_widget = QWidget(self.images_grid_layout)
 
@@ -50,7 +92,8 @@ class Start_Page5(QMainWindow):
             picture_label.setMaximumSize(QSize(320, 400))
 
             # set the image of the picture label and scale it to fit the maximum size of the label
-            pixmap = QPixmap(f"Images Temp Folder/{images_list[i]}")
+            pixmap = QPixmap(f"Images Temp Folder/{self.images_list[i]}")
+
             scaled_pixmap = pixmap.scaled(
                 picture_label.maximumSize(), Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
@@ -84,15 +127,23 @@ class Start_Page5(QMainWindow):
             # add the vertical layout to a container widget
             container_widget = QWidget()
             container_widget.setLayout(vertical_layout)
-            container_widget.objectName = f"container_widget_{i}"
+            # container_widget.objectName = f"container_widget_{i}"
+            # add the path of the image to the object name of the container widget
+            container_widget.setObjectName(
+                f"container_widget_{i}:Images Temp Folder/{self.images_list[i]}"
+            )
 
             # add the container widget to the images grid layout
             self.images_grid_layout.layout().addWidget(container_widget)
 
             # create three text labels
-            text_label1 = QLabel("Text Label 1")
-            text_label2 = QLabel("Text Label 2")
-            text_label3 = QLabel("Text Label 3")
+            text_label1 = QLabel("Similarity score: 94.73% (Highest match)")
+            text_label2 = QLabel("Case no.:")
+            text_label3 = QLabel("PS:")
+
+            text_label1.setStyleSheet("color:white; text:bold")
+            text_label2.setStyleSheet("color:white;")
+            text_label3.setStyleSheet("color:white;")
 
             # add the text labels to the vertical layout
             vertical_layout.addWidget(text_label1)
@@ -103,37 +154,40 @@ class Start_Page5(QMainWindow):
             container_widget.setMaximumSize(QSize(320, 400))
 
             # connect the clicked signal of the cross button to the hide_layout slot, passing in the container widget as a parameter
-            cross_button.clicked.connect(self.hide_layout)
+            cross_button.clicked.connect(self.on_button_clicked)
 
             # add the container widget to the grid layout
             grid_layout.addWidget(container_widget, i // 3, i % 3)
 
-    @pyqtSlot()
-    def hide_layout(self):
-        # Get the sender object (the button that was clicked)
+    def get_images_list(self):
+        self.images_list = []
+        # if os.path.isdir("Images Temp Folder"):
+        self.images_list = os.listdir("Images Temp Folder")
+        self.layout_show()
+
+    def on_button_clicked(self):
         button = self.sender()
+        layout = button.parent()
 
-        # Get the object name (the unique ID we assigned)
-        button_parent = button.parent()
+        # get the object name of the parent of the button
+        object_name = layout.objectName()
 
-        # Remove the widget from the layout and delete it
-        # print(self.images_grid_layout.layout().indexOf(button_parent))
-        index = self.images_grid_layout.layout().indexOf(button_parent)
-        print(index)
-        self.images_grid_layout.layout().itemAt(index).widget().setParent(None)
-        # self.images_grid_layout.layout().itemAt(index).widget().deleteLater()
+        # get the path of the image from the object name
+        path = object_name.split(":")[1]
 
-        # Rearrange the remaining widgets in the layout
         count = self.images_grid_layout.layout().count()
-        print(count)
-        for i in range(count):
-            widget = self.images_grid_layout.layout().itemAt(i).widget()
-            row = i // 3
-            column = i % 3
-            self.images_grid_layout.layout().addWidget(widget, row, column)
+        i = 0
+        while i < count:
+            if self.images_grid_layout.layout().itemAt(i):
+                widget = self.images_grid_layout.layout().itemAt(i).widget()
+                self.images_grid_layout.layout().removeWidget(widget)
+                i -= 1
+            i += 1
 
-        # Hide the layout
-        # button_parent.hide()
+        os.remove(path)
+        self.get_images_list()
+
+        # layout.hide()
 
     def show_text(self):
         self.path_folder_pg5 = os.path.abspath("temp")
@@ -175,11 +229,11 @@ class Start_Page5(QMainWindow):
         return savefile
 
 
-if __name__ == "__main__":
-    import sys
+# if __name__ == "__main__":
+#     import sys
 
-    app = QApplication(sys.argv)
-    ui = Start_Page5()
-    ui.showMaximized()
-    ui.show()
-    sys.exit(app.exec_())
+#     app = QApplication(sys.argv)
+#     ui = Start_Page5()
+#     ui.showMaximized()
+#     ui.show()
+#     sys.exit(app.exec_())

@@ -63,7 +63,7 @@ class Start_Page2(QMainWindow):
         if self.path_name == '':
             flag = False
             self.show_popup("Please upload an image!")
-            # if self.frame.pixmap() is None or 
+            # if self.frame.pixmap() is None or
 
 
         if flag:
@@ -86,7 +86,7 @@ class Start_Page2(QMainWindow):
             img = Image.open(self.path_name)
             img = img.convert('RGB')
             img.save(self.path_folder+"/image.jpeg")
-            
+
         return flag
 
     def resize_image(self, img,im):
@@ -101,10 +101,10 @@ class Start_Page2(QMainWindow):
         return savefile
 
     def upload_photo(self, event):
-        fname = QFileDialog.getOpenFileName(self, 'Open file', 
+        fname = QFileDialog.getOpenFileName(self, 'Open file',
          'c:\\',"Image files (*.jpeg *.gif *.ico *.png *.bmp *.gif *.tif *.tiff)")
-        
-        
+
+
 
         if fname[0] != '':
             extn = fname[0].split('.')
@@ -131,4 +131,18 @@ class Start_Page2(QMainWindow):
                     self.show_popup("The image is corrupt!")
 
 
-    
+    def clear_text(self):
+        self.input_case_no.clear()
+        self.input_ps.clear()
+        self.input_exm_name.clear()
+        self.input_exm_bp.clear()
+        self.input_remarks.clear()
+        self.frame.clear()
+        fname = os.path.abspath("images/Group 68.png")
+        im = Image.open(fname)
+        fname = self.resize_image(fname, im)
+        self.frame.setPixmap(QPixmap(fname))
+
+
+
+
